@@ -1,18 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+            http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.mycompany</groupId>
     <artifactId>StudentModel</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
+
     <modules>
         <module>StudentModel-api</module>
         <module>StudentModel-impl</module>
         <module>common</module>
     </modules>
 
+    <properties>
+        <student.model.version>${version}</student.model.version>
+        <jdk.version>1.8</jdk.version>
+        <maven.version>2.2</maven.version>
+        <springframework.version>4.2.5.RELEASE</springframework.version>
+        <postgresql.jdbc.version>9.1-901-1.jdbc4</postgresql.jdbc.version>
+        <hibernate.version>3.5.6-Final</hibernate.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${maven.version}</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

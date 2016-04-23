@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="org.mycompany.dao, org.mycompany.dao.impl"/>
+    <context:annotation-config/>
+
+    <task:annotation-driven executor="modelExecutor" scheduler="modelScheduler" />
+    <task:executor id="modelExecutor" pool-size="5" />
+    <task:scheduler id="modelScheduler" pool-size="10" />
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--<bean id="dataSource"-->
+          <!--class="org.springframework.jndi.JndiObjectFactoryBean">-->
+        <!--<property name="jndiName" value="java:jboss/PostgresDS"/>-->
+    <!--</bean>-->
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:15432/testdb"/>
+        <property name="username" value="test_user"/>
+        <property name="password" value="qwerty"/>
+    </bean>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="jdbcTemplate"
+          class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="org.mycompany.dao.StudenDao"
+          class="org.mycompany.dao.impl.StudentDaoImpl">
+    </bean>
+
+</beans>

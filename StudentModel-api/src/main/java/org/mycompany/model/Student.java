@@ -5,33 +5,38 @@ import java.io.Serializable;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "student")
-public class Student implements Serializable
+@Table(name = "students")
+public class Student extends EntityModel implements Serializable
 {
     @Id
-    @Column(name = "id")
-    @SequenceGenerator(name = "student_sequence", sequenceName = "generate_student_id", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
+    @Column(name = "id", nullable = false)
+    @SequenceGenerator(name = "generate_id", sequenceName = "generate_id", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generate_id")
     private BigInteger id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "age")
+    @Column(name = "age", nullable = false)
     private Integer age;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
 
     public Student()
     {
     }
 
-    public Student(String firstName, String lastName, Integer age)
+    public Student(String firstName, String lastName, Integer age, Group group)
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        this.group = group;
     }
 
     public BigInteger getId()
@@ -72,6 +77,16 @@ public class Student implements Serializable
     public void setAge(Integer age)
     {
         this.age = age;
+    }
+
+    public Group getGroup()
+    {
+        return group;
+    }
+
+    public void setGroup(Group group)
+    {
+        this.group = group;
     }
 
     @Override

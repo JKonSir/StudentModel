@@ -29,7 +29,7 @@
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
         <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
-        <property name="persistenceUnitName" value="StudentUnit" />
+        <property name="persistenceUnitName" value="entityManager" />
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
@@ -44,8 +44,18 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <bean id="org.mycompany.dao.StudenDao"
-          class="org.mycompany.dao.impl.StudentDaoImpl">
+    <bean id="studentDao"
+          class="org.mycompany.dao.impl.EntityDaoImpl">
+        <constructor-arg name="type">
+            <value>org.mycompany.model.Student</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="groupDao"
+          class="org.mycompany.dao.impl.EntityDaoImpl">
+        <constructor-arg name="type">
+            <value>org.mycompany.model.Group</value>
+        </constructor-arg>
     </bean>
 
 </beans>

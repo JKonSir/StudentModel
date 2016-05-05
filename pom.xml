@@ -8,7 +8,7 @@
     <groupId>org.mycompany</groupId>
     <artifactId>StudentModel</artifactId>
     <packaging>pom</packaging>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 
     <modules>
         <module>StudentModel-api</module>
@@ -21,6 +21,7 @@
         <jdk.version>1.8</jdk.version>
         <maven.version>2.2</maven.version>
         <springframework.version>4.2.5.RELEASE</springframework.version>
+        <postgresql.jdbc.version>9.1-901-1.jdbc4</postgresql.jdbc.version>
     </properties>
 
     <build>

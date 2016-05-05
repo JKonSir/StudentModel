@@ -1,99 +1,56 @@
 package org.mycompany.dao.impl;
 
 import org.mycompany.dao.StudentDao;
-import org.mycompany.mapper.StudentMapper;
 import org.mycompany.model.Student;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.math.BigInteger;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED)
 public class StudentDaoImpl implements StudentDao
 {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public void create(final Student student)
+    public void create(Student student)
     {
-        final String sql = "INSERT INTO student (first_name, last_name, age) VALUES (?, ?, ?)";
-
-        jdbcTemplate.update(new PreparedStatementCreator()
-        {
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException
-            {
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, student.getFirstName());
-                preparedStatement.setString(2, student.getLastName());
-                preparedStatement.setInt(3, student.getAge());
-
-                return preparedStatement;
-            }
-        });
-
-        System.out.println("Created student: " + student);
+        entityManager.persist(student);
     }
 
-    public void update(final Student student)
+    public void update(Student student)
     {
-        final String sql = "UPDATE student SET first_name = ?, last_name = ?, age = ? WHERE id = ?";
-
-        jdbcTemplate.update(new PreparedStatementCreator()
-        {
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException
-            {
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, student.getFirstName());
-                preparedStatement.setString(2, student.getLastName());
-                preparedStatement.setInt(3, student.getAge());
-                preparedStatement.setBigDecimal(4, new BigDecimal(student.getId().toString()));
-
-                return preparedStatement;
-            }
-        });
-
-        System.out.println("Update student with id: " + student.getId());
+        entityManager.merge(student);
     }
 
-    public void delete(final BigInteger id)
+    public void delete(BigInteger id)
     {
-        final String sql = "DELETE FROM student WHERE id = ?";
+        Student student = getStudent(id);
 
-        jdbcTemplate.update(new PreparedStatementCreator()
-        {
-            public PreparedStatement createPreparedStatement(Connection connection) throws SQLException
-            {
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setBigDecimal(1, new BigDecimal(id.toString()));
-
-                return preparedStatement;
-            }
-        });
-
-        System.out.println("Delete student with id: " + id);
+        entityManager.remove(student);
     }
 
     public Student getStudent(BigInteger id)
     {
-        final String SQL = "SELECT * FROM student WHERE id = ?";
-        Student student = (Student) jdbcTemplate.queryForObject(SQL,
-                new Object[]{new BigDecimal(id.toString())}, new StudentMapper());
-        return student;
+        return entityManager.find(Student.class, id);
     }
 
     public List<Student> getStudents()
     {
-        final String sql = "SELECT * FROM student";
-        List<Student> students = jdbcTemplate.query(sql,
-                new StudentMapper());
-        return students;
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Student> cq = cb.createQuery(Student.class);
+        Root<Student> rootEntry = cq.from(Student.class);
+        CriteriaQuery<Student> all = cq.select(rootEntry);
+        TypedQuery<Student> allQuery = entityManager.createQuery(all);
+
+        return allQuery.getResultList();
     }
 
 }

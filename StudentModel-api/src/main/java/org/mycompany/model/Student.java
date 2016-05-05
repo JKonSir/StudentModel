@@ -1,17 +1,17 @@
 package org.mycompany.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigInteger;
 
 @Entity
 @Table(name = "student")
-public class Student
+public class Student implements Serializable
 {
     @Id
     @Column(name = "id")
+    @SequenceGenerator(name = "student_sequence", sequenceName = "generate_student_id", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
     private BigInteger id;
 
     @Column(name = "first_name")
@@ -27,14 +27,8 @@ public class Student
     {
     }
 
-    public Student(BigInteger id)
+    public Student(String firstName, String lastName, Integer age)
     {
-        this.id = id;
-    }
-
-    public Student(BigInteger id, String firstName, String lastName, Integer age)
-    {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;

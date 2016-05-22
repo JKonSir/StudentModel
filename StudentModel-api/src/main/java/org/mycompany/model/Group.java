@@ -1,5 +1,7 @@
 package org.mycompany.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigInteger;
@@ -7,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "groups")
-public class Group extends EntityModel implements Serializable
+public class Group implements EntityModel, Serializable
 {
     @Id
     @Column(name = "id", nullable = false)
@@ -21,7 +23,8 @@ public class Group extends EntityModel implements Serializable
     @Column(name = "faculty_name", nullable = false)
     private String facultyName;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Student> students;
 
     public Group()

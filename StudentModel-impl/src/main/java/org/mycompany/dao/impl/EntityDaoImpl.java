@@ -2,8 +2,6 @@ package org.mycompany.dao.impl;
 
 import org.mycompany.dao.EntityDao;
 import org.mycompany.model.EntityModel;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,10 +12,9 @@ import javax.persistence.criteria.Root;
 import java.math.BigInteger;
 import java.util.List;
 
-@Transactional(propagation = Propagation.REQUIRED)
 public class EntityDaoImpl<T extends EntityModel> implements EntityDao<T>
 {
-    @PersistenceContext
+    @PersistenceContext(unitName = "entityManager")
     private EntityManager entityManager;
 
     private final Class<T> type;

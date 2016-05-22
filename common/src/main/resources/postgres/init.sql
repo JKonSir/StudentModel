@@ -1,13 +1,21 @@
-CREATE SEQUENCE generate_id;
+DROP TABLE IF EXISTS students;
 
-CREATE TABLE groups
+DROP TABLE IF EXISTS groups;
+
+DROP SEQUENCE IF EXISTS generate_id;
+
+CREATE SEQUENCE generate_id INCREMENT BY 1
+MINVALUE 1 NO MAXVALUE
+START WITH 1 NO CYCLE;
+
+CREATE TABLE IF NOT EXISTS groups
 (
   id BIGINT PRIMARY KEY DEFAULT  nextval('generate_id'),
   group_number INTEGER NOT NULL UNIQUE,
   faculty_name VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE students
+CREATE TABLE IF NOT EXISTS students
 (
   id BIGINT PRIMARY KEY DEFAULT nextval('generate_id'),
   first_name VARCHAR(20) NOT NULL,

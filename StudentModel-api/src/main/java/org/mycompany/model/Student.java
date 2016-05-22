@@ -1,12 +1,14 @@
 package org.mycompany.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigInteger;
 
 @Entity
 @Table(name = "students")
-public class Student extends EntityModel implements Serializable
+public class Student implements EntityModel, Serializable
 {
     @Id
     @Column(name = "id", nullable = false)
@@ -23,8 +25,9 @@ public class Student extends EntityModel implements Serializable
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
+    @JsonIgnore
     private Group group;
 
     public Student()

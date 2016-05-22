@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="StudentModelDependencyOnSpring"
+          class="org.mycompany.utils.StudentModelDependencyOnSpring"/>
+
+    <bean id="studentDao"
+          class="org.mycompany.dao.impl.EntityDaoImpl">
+        <constructor-arg name="type" value="org.mycompany.model.Student"/>
+    </bean>
+
+    <bean id="groupDao"
+          class="org.mycompany.dao.impl.EntityDaoImpl">
+        <constructor-arg name="type" value="org.mycompany.model.Group"/>
+    </bean>
+
+    <bean id="org.mycompany.utils.TxUtils"
+          class="org.mycompany.utils.impl.TxUtilsImpl"/>
+
+</beans>

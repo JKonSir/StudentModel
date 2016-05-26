@@ -36,7 +36,7 @@
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
         <property name="packagesToScan" value="org.mycompany"/>
-        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+        <property name="persistenceXmlLocation" value="classpath:APP-INF/persistence/persistence.xml"/>
         <property name="persistenceUnitName" value="entityManager"/>
         <property name="jpaProperties">
             <props>

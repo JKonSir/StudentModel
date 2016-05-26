@@ -7,7 +7,7 @@ public class ServiceLocator
 {
     private static volatile ServiceLocator INSTANCE;
 
-    private static final ApplicationContext CONTEXT = new ClassPathXmlApplicationContext("META-INF/spring/spring-ref-context.xml");
+    private static final ApplicationContext CONTEXT = new ClassPathXmlApplicationContext("APP-INF/spring/spring-ref-context.xml");
 
     ServiceLocator()
     {

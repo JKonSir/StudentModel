@@ -13,7 +13,7 @@ public interface EntityDao<T extends EntityModel>
      *
      * @param entity - entity added or updated
      */
-    void createOrUpdate(T entity);
+//    void createOrUpdate(T entity);
 
     /**
      * delete entity from database

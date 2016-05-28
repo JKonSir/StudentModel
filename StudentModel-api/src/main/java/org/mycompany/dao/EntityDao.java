@@ -13,14 +13,14 @@ public interface EntityDao<T extends EntityModel>
      *
      * @param entity - entity added or updated
      */
-//    void createOrUpdate(T entity);
+    void createOrUpdate(T entity);
 
     /**
      * delete entity from database
      *
      * @param entity - entity for delete
      */
-//    void delete(T entity);
+    void delete(T entity);
 
     /**
      * use for get entity from database by identifier

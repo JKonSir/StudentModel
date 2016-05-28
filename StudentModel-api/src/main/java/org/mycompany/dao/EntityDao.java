@@ -20,7 +20,7 @@ public interface EntityDao<T extends EntityModel>
      *
      * @param entity - entity for delete
      */
-    void delete(T entity);
+//    void delete(T entity);
 
     /**
      * use for get entity from database by identifier

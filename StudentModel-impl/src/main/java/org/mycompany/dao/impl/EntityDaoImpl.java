@@ -1,7 +1,7 @@
 package org.mycompany.dao.impl;
 
-import org.mycompany.dao.EntityDao;
-//import org.mycompany.model.EntityModel;
+//import org.mycompany.dao.EntityDao;
+import org.mycompany.model.EntityModel;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

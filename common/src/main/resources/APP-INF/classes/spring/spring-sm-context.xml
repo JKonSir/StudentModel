@@ -10,17 +10,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
-
     <context:annotation-config/>
-
-    <!--<bean id="dataSource"-->
-    <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
-    <!--<property name="driverClassName" value="org.postgresql.Driver"/>-->
-    <!--<property name="url" value="jdbc:postgresql://localhost:5432/testdb"/>-->
-    <!--<property name="username" value="test_user"/>-->
-    <!--<property name="password" value="qwerty"/>-->
-    <!--</bean>-->
+    <tx:jta-transaction-manager />
+    <tx:annotation-driven/>
 
     <bean id="dataSource"
           class="org.springframework.jndi.JndiObjectFactoryBean">
@@ -33,21 +25,16 @@
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
-        <property name="packagesToScan" value="org.mycompany"/>
         <property name="persistenceXmlLocation" value="persistence/persistence.xml"/>
         <property name="persistenceUnitName" value="entityManager"/>
         <property name="jpaProperties">
             <props>
+                <prop key="hibernate.transaction.jta.platform">org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2dll.auto">update</prop>
             </props>
         </property>
-    </bean>
-
-    <bean id="transactionManager"
-          class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
 </beans>

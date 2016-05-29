@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
 
-    <persistence-unit name="entityManager" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="entityManager" transaction-type="JTA">
         <class>org.mycompany.model.Student</class>
         <class>org.mycompany.model.Group</class>
     </persistence-unit>

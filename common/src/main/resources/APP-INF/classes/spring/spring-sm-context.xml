@@ -12,22 +12,20 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-    <context:component-scan base-package="org.mycompany"/>
-
     <context:annotation-config/>
 
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/testdb"/>
-        <property name="username" value="test_user"/>
-        <property name="password" value="qwerty"/>
-    </bean>
-
     <!--<bean id="dataSource"-->
-          <!--class="org.springframework.jndi.JndiObjectFactoryBean">-->
-        <!--<property name="jndiName" value="java:jboss/PostgresDS"/>-->
+    <!--class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+    <!--<property name="driverClassName" value="org.postgresql.Driver"/>-->
+    <!--<property name="url" value="jdbc:postgresql://localhost:5432/testdb"/>-->
+    <!--<property name="username" value="test_user"/>-->
+    <!--<property name="password" value="qwerty"/>-->
     <!--</bean>-->
+
+    <bean id="dataSource"
+          class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:jboss/PostgresDS"/>
+    </bean>
 
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -36,7 +34,7 @@
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
         <property name="packagesToScan" value="org.mycompany"/>
-        <property name="persistenceXmlLocation" value="classpath:APP-INF/persistence/persistence.xml"/>
+        <property name="persistenceXmlLocation" value="persistence/persistence.xml"/>
         <property name="persistenceUnitName" value="entityManager"/>
         <property name="jpaProperties">
             <props>

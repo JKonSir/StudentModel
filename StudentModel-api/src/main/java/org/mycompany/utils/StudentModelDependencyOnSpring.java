@@ -46,12 +46,12 @@ public class StudentModelDependencyOnSpring
     @Autowired
     private TxUtils txUtils;
 
-    public EntityDao getStudentDao()
+    public EntityDao<Student> getStudentDao()
     {
         return studentDao;
     }
 
-    public EntityDao getGroupDao()
+    public EntityDao<Group> getGroupDao()
     {
         return groupDao;
     }

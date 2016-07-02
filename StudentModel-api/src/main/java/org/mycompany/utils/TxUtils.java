@@ -13,14 +13,6 @@ public interface TxUtils
     <T> T doInTransactionMandatory(Callable<T> callable) throws Exception;
 
     /**
-     * execute call() within a nested transaction if a current transaction exists, behave like PROPAGATION_REQUIRED else.
-     *
-     * @param callable
-     * @throws Exception
-     */
-    <T> T doInTransactionNested(Callable<T> callable) throws Exception;
-
-    /**
      * Execute call() non-transactionally, throw an exception if a transaction exists.
      *
      * @param callable

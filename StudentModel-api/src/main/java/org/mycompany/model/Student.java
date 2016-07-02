@@ -8,6 +8,7 @@ import java.math.BigInteger;
 
 @Entity
 @Table(name = "students")
+@NamedNativeQuery(name = "findAllStudents", query = "SELECT s FROM students s ORDER BY s.id")
 public class Student implements EntityModel, Serializable
 {
     @Id

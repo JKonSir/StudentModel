@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "groups")
+@NamedNativeQuery(name = "findAllGroups", query = "SELECT g FROM groups g ORDER BY g.group_number")
 public class Group implements EntityModel, Serializable
 {
     @Id

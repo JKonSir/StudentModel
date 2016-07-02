@@ -3,11 +3,11 @@ package org.mycompany.utils;
 import org.mycompany.dao.EntityDao;
 import org.mycompany.model.Group;
 import org.mycompany.model.Student;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 public class StudentModelDependencyOnSpring
 {
@@ -35,15 +35,15 @@ public class StudentModelDependencyOnSpring
         INSTANCE = null;
     }
 
-    @Autowired
-    @Qualifier("studentDao")
+    @Inject
+    @Named("studentDao")
     private EntityDao<Student> studentDao;
 
-    @Autowired
-    @Qualifier("groupDao")
+    @Inject
+    @Named("groupDao")
     private EntityDao<Group> groupDao;
 
-    @Autowired
+    @Inject
     private TxUtils txUtils;
 
     public EntityDao<Student> getStudentDao()

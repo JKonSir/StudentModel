@@ -12,7 +12,7 @@
 
     <context:annotation-config/>
     <tx:jta-transaction-manager />
-    <tx:annotation-driven/>
+    <tx:annotation-driven />
 
     <bean id="dataSource"
           class="org.springframework.jndi.JndiObjectFactoryBean">
@@ -29,7 +29,9 @@
         <property name="persistenceUnitName" value="entityManager"/>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.transaction.jta.platform">org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform</prop>
+                <prop key="hibernate.transaction.jta.platform">
+                    org.hibernate.engine.transaction.jta.platform.internal.JBossAppServerJtaPlatform
+                </prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2dll.auto">update</prop>

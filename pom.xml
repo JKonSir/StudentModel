@@ -89,6 +89,7 @@
                 </executions>
             </plugin>
 
+            <!-- maven clean plugin -->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>${maven.version}</version>

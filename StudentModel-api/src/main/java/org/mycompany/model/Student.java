@@ -35,7 +35,7 @@ public class Student implements GenericEntity, Serializable
     private String lastName;
 
     @Column(name = "age", nullable = false)
-    private Integer age;
+    private Integer age;//
 
     @JsonIgnore
     @ManyToOne

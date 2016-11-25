@@ -3,7 +3,7 @@ package org.mycompany.model;
 
 import java.math.BigInteger;
 
-public interface EntityModel
+public interface GenericEntity
 {
     BigInteger getId();
 }

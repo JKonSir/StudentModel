@@ -2,15 +2,26 @@ package org.mycompany.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
 
-@Entity
+@Entity(name = "GROUP_ENTITY")
 @Table(name = "groups")
-@NamedNativeQuery(name = "findAllGroups", query = "SELECT g FROM groups g ORDER BY g.group_number")
-public class Group implements EntityModel, Serializable
+@NamedQuery(name = "findAllGroups",
+        query = "SELECT g FROM GROUP_ENTITY g ORDER BY g.groupNumber")
+public class Group implements GenericEntity, Serializable
 {
     @Id
     @Column(name = "id", nullable = false)
@@ -24,8 +35,8 @@ public class Group implements EntityModel, Serializable
     @Column(name = "faculty_name", nullable = false)
     private String facultyName;
 
-    @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
     @JsonIgnore
+    @OneToMany(mappedBy = "group", fetch = FetchType.LAZY)
     private List<Student> students;
 
     public Group()
@@ -85,6 +96,7 @@ public class Group implements EntityModel, Serializable
                 "id=" + id +
                 ", groupNumber=" + groupNumber +
                 ", facultyName='" + facultyName + '\'' +
+                ", students" + students +
                 '}';
     }
 

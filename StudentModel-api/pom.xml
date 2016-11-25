@@ -15,18 +15,23 @@
     <artifactId>StudentModel-api</artifactId>
 
     <dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.mycompany</groupId>
-            <artifactId>parent-dependencies</artifactId>
-            <version>${project.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mycompany</groupId>
+                <artifactId>parent-dependencies</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
 
         <!-- java dependencies -->
 

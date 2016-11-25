@@ -1,13 +1,12 @@
 package org.mycompany.utils;
 
-import org.mycompany.dao.EntityDao;
 import org.mycompany.model.Group;
 import org.mycompany.model.Student;
+import org.mycompany.repositories.EntityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 public class StudentModelDependencyOnSpring
 {
@@ -35,30 +34,20 @@ public class StudentModelDependencyOnSpring
         INSTANCE = null;
     }
 
-    @Inject
-    @Named("studentDao")
-    private EntityDao<Student> studentDao;
+    @Autowired
+    private EntityRepository<Group> groupRepository;
 
-    @Inject
-    @Named("groupDao")
-    private EntityDao<Group> groupDao;
+    @Autowired
+    private EntityRepository<Student> studentRepository;
 
-    @Inject
-    private TxUtils txUtils;
-
-    public EntityDao<Student> getStudentDao()
+    public EntityRepository<Group> getGroupRepository()
     {
-        return studentDao;
+        return groupRepository;
     }
 
-    public EntityDao<Group> getGroupDao()
+    public EntityRepository<Student> getStudentRepository()
     {
-        return groupDao;
-    }
-
-    public TxUtils getTxUtils()
-    {
-        return txUtils;
+        return studentRepository;
     }
 
 }

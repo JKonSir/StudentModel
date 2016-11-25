@@ -2,14 +2,25 @@ package org.mycompany.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigInteger;
 
-@Entity
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity(name = "STUDENT_ENTITY")
 @Table(name = "students")
-@NamedNativeQuery(name = "findAllStudents", query = "SELECT s FROM students s ORDER BY s.id")
-public class Student implements EntityModel, Serializable
+@NamedQuery(name = "findAllStudent",
+        query = "SELECT s FROM STUDENT_ENTITY s ORDER BY s.firstName")
+public class Student implements GenericEntity, Serializable
 {
     @Id
     @Column(name = "id", nullable = false)
@@ -26,9 +37,9 @@ public class Student implements EntityModel, Serializable
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id")
     @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "group_id")
     private Group group;
 
     public Student()

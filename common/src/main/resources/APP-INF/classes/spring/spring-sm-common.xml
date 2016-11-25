@@ -8,21 +8,9 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
+    <context:component-scan base-package="org.mycompany.repositories"/>
 
     <bean id="org.mycompany.utils.StudentModelDependencyOnSpring"
           class="org.mycompany.utils.StudentModelDependencyOnSpring"/>
-
-    <bean id="studentDao"
-          class="org.mycompany.dao.impl.EntityDaoImpl">
-        <constructor-arg name="type" value="org.mycompany.model.Student"/>
-    </bean>
-
-    <bean id="groupDao"
-          class="org.mycompany.dao.impl.EntityDaoImpl">
-        <constructor-arg name="type" value="org.mycompany.model.Group"/>
-    </bean>
-
-    <bean id="org.mycompany.utils.TxUtils"
-          class="org.mycompany.utils.impl.TxUtilsImpl"/>
 
 </beans>

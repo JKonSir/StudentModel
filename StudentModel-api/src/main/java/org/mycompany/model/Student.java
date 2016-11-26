@@ -7,6 +7,7 @@ import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ import javax.persistence.Table;
 public class Student implements GenericEntity, Serializable
 {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, unique = true)
     @SequenceGenerator(name = "generate_id", sequenceName = "generate_id", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generate_id")
     private BigInteger id;
@@ -35,23 +36,29 @@ public class Student implements GenericEntity, Serializable
     private String lastName;
 
     @Column(name = "age", nullable = false)
-    private Integer age;//
+    private Integer age;
+
+    @Column(name = "group_number", nullable = false)
+    private Integer groupNumber;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "group_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_number",
+            referencedColumnName = "group_number",
+            insertable = false,
+            updatable = false)
     private Group group;
 
     public Student()
     {
     }
 
-    public Student(String firstName, String lastName, Integer age, Group group)
+    public Student(String firstName, String lastName, Integer age, Integer groupNumber)
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-        this.group = group;
+        this.groupNumber = groupNumber;
     }
 
     public BigInteger getId()
@@ -94,14 +101,19 @@ public class Student implements GenericEntity, Serializable
         this.age = age;
     }
 
+    public Integer getGroupNumber()
+    {
+        return groupNumber;
+    }
+
+    public void setGroupNumber(Integer groupNumber)
+    {
+        this.groupNumber = groupNumber;
+    }
+
     public Group getGroup()
     {
         return group;
-    }
-
-    public void setGroup(Group group)
-    {
-        this.group = group;
     }
 
     @Override

@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 @Repository
@@ -30,9 +29,14 @@ public class StudentRepository implements EntityRepository<Student>
 
     @Override
     @Transactional
-    public Student update(Student student)
+    public Student update(BigInteger studentId, Student student)
     {
-        return entityManager.merge(student);
+        Student result = entityManager.find(Student.class, studentId);
+        result.setFirstName(student.getFirstName());
+        result.setLastName(student.getLastName());
+        result.setAge(student.getAge());
+        result.setGroupNumber(student.getGroupNumber());
+        return result;
     }
 
     @Override
@@ -62,7 +66,8 @@ public class StudentRepository implements EntityRepository<Student>
     @Transactional
     public List<Student> findAll()
     {
-        TypedQuery<Student> studentTypedQuery = entityManager.createNamedQuery("findAllStudent", Student.class);
+        TypedQuery<Student> studentTypedQuery =
+                entityManager.createNamedQuery("findAllStudent", Student.class);
 
         return studentTypedQuery.getResultList();
     }

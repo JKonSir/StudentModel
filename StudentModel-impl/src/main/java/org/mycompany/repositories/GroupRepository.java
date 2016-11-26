@@ -29,9 +29,12 @@ public class GroupRepository implements EntityRepository<Group>
 
     @Override
     @Transactional
-    public Group update(Group group)
+    public Group update(BigInteger groupId, Group group)
     {
-        return entityManager.merge(group);
+        Group result = entityManager.find(Group.class, groupId);
+        result.setGroupNumber(group.getGroupNumber());
+        result.setFacultyName(group.getFacultyName());
+        return result;
     }
 
     @Override
@@ -67,7 +70,8 @@ public class GroupRepository implements EntityRepository<Group>
     @Transactional
     public List<Group> findAll()
     {
-        TypedQuery<Group> groupTypedQuery = entityManager.createNamedQuery("findAllGroups", Group.class);
+        TypedQuery<Group> groupTypedQuery =
+                entityManager.createNamedQuery("findAllGroups", Group.class);
 
         return groupTypedQuery.getResultList();
     }

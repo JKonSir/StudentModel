@@ -28,6 +28,20 @@
 
     <dependencies>
 
+        <!--project dependencies-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.mycompany</groupId>-->
+            <!--<artifactId>StudentModel-api</artifactId>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.mycompany</groupId>-->
+            <!--<artifactId>StudentModel-api</artifactId>-->
+        <!--</dependency>-->
+
+        <!--spring dependencies-->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>

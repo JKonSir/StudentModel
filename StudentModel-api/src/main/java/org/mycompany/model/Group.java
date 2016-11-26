@@ -24,12 +24,12 @@ import java.util.List;
 public class Group implements GenericEntity, Serializable
 {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, unique = true)
     @SequenceGenerator(name = "generate_id", sequenceName = "generate_id", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "generate_id")
     private BigInteger id;
 
-    @Column(name = "group_number", nullable = false)
+    @Column(name = "group_number", nullable = false, unique = true)
     private Integer groupNumber;
 
     @Column(name = "faculty_name", nullable = false)
@@ -52,11 +52,6 @@ public class Group implements GenericEntity, Serializable
     public BigInteger getId()
     {
         return id;
-    }
-
-    public void setId(BigInteger id)
-    {
-        this.id = id;
     }
 
     public Integer getGroupNumber()

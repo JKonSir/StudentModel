@@ -9,7 +9,7 @@ public interface EntityRepository<T extends GenericEntity>
 {
     T save(T entity);
 
-    T update(T entity);
+    T update(BigInteger id, T entity);
 
     T findById(BigInteger id);
 

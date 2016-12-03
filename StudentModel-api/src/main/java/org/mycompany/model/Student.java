@@ -17,6 +17,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.AccessLevel;
+import lombok.Setter;
+
+@lombok.Getter
+@lombok.Setter
 @Entity(name = "STUDENT_ENTITY")
 @Table(name = "students")
 @NamedQuery(name = "findAllStudent",
@@ -41,6 +46,7 @@ public class Student implements GenericEntity, Serializable
     @Column(name = "group_number", nullable = false)
     private Integer groupNumber;
 
+    @Setter(value = AccessLevel.NONE)
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_number",
@@ -61,56 +67,6 @@ public class Student implements GenericEntity, Serializable
         this.groupNumber = groupNumber;
     }
 
-    public BigInteger getId()
-    {
-        return id;
-    }
-
-    public String getFirstName()
-    {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName)
-    {
-        this.firstName = firstName;
-    }
-
-    public String getLastName()
-    {
-        return lastName;
-    }
-
-    public void setLastName(String lastName)
-    {
-        this.lastName = lastName;
-    }
-
-    public Integer getAge()
-    {
-        return age;
-    }
-
-    public void setAge(Integer age)
-    {
-        this.age = age;
-    }
-
-    public Integer getGroupNumber()
-    {
-        return groupNumber;
-    }
-
-    public void setGroupNumber(Integer groupNumber)
-    {
-        this.groupNumber = groupNumber;
-    }
-
-    public Group getGroup()
-    {
-        return group;
-    }
-
     @Override
     public String toString()
     {
@@ -118,7 +74,8 @@ public class Student implements GenericEntity, Serializable
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", age=" + age +
+                ", age=" + age + '\'' +
+                ", group=" + group + '\'' +
                 '}';
     }
 

@@ -17,6 +17,8 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.List;
 
+@lombok.Getter
+@lombok.Setter
 @Entity(name = "GROUP_ENTITY")
 @Table(name = "groups")
 @NamedQuery(name = "findAllGroups",
@@ -47,41 +49,6 @@ public class Group implements GenericEntity, Serializable
     {
         this.groupNumber = groupNumber;
         this.facultyName = facultyName;
-    }
-
-    public BigInteger getId()
-    {
-        return id;
-    }
-
-    public Integer getGroupNumber()
-    {
-        return groupNumber;
-    }
-
-    public void setGroupNumber(Integer groupNumber)
-    {
-        this.groupNumber = groupNumber;
-    }
-
-    public String getFacultyName()
-    {
-        return facultyName;
-    }
-
-    public void setFacultyName(String facultyName)
-    {
-        this.facultyName = facultyName;
-    }
-
-    public List<Student> getStudents()
-    {
-        return students;
-    }
-
-    public void setStudents(List<Student> students)
-    {
-        this.students = students;
     }
 
     @Override

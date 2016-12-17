@@ -8,12 +8,14 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
+    <import resource="spring-sm-common.xml"/>
+    <import resource="spring-sm-context.xml"/>
 
     <bean id="sharedContext" class="org.springframework.context.support.ClassPathXmlApplicationContext">
         <constructor-arg>
             <list>
-                <value>spring/spring-sm-context.xml</value>
-                <value>spring/spring-sm-common.xml</value>
+                <value>APP-INF/classes/spring/spring-sm-context.xml</value>
+                <value>APP-INF/classes/spring/spring-sm-common.xml</value>
             </list>
         </constructor-arg>
     </bean>

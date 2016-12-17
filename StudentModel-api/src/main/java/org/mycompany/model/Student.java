@@ -75,7 +75,7 @@ public class Student implements GenericEntity, Serializable
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age + '\'' +
-                ", group=" + group + '\'' +
+                ", groupNumber=" + groupNumber + '\'' +
                 '}';
     }
 

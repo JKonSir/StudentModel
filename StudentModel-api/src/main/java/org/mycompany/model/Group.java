@@ -58,7 +58,6 @@ public class Group implements GenericEntity, Serializable
                 "id=" + id +
                 ", groupNumber=" + groupNumber +
                 ", facultyName='" + facultyName + '\'' +
-                ", students" + students +
                 '}';
     }
 

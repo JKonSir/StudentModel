@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS students
   first_name VARCHAR(20) NOT NULL,
   last_name VARCHAR(20) NOT NULL,
   age INTEGER NOT NULL,
-  group_id INTEGER NOT NULL REFERENCES groups(id)
+  group_number INTEGER NOT NULL REFERENCES groups(group_number)
 );
 
 INSERT INTO groups(group_number, faculty_name)
@@ -33,14 +33,14 @@ INSERT INTO groups(group_number, faculty_name)
 INSERT INTO groups(group_number, faculty_name)
     VALUES (3, 'griffindor');
 
-INSERT INTO students(first_name, last_name, age, group_id)
+INSERT INTO students(first_name, last_name, age, group_number)
     VALUES ('VASYA', 'VASECHKIN', 22, 1);
 
-INSERT INTO students(first_name, last_name, age, group_id)
+INSERT INTO students(first_name, last_name, age, group_number)
     VALUES ('PETYA', 'PETECHKIN', 23, 1);
 
-INSERT INTO students(first_name, last_name, age, group_id)
+INSERT INTO students(first_name, last_name, age, group_number)
     VALUES ('MISHA', 'MICHAILOV', 25, 2);
 
-INSERT INTO students(first_name, last_name, age, group_id)
+INSERT INTO students(first_name, last_name, age, group_number)
     VALUES ('MASHA', 'VASECHKINA', 24, 3);

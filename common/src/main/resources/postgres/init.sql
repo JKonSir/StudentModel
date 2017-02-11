@@ -1,3 +1,12 @@
+-- create test data base and test user
+CREATE DATABASE test_db;
+
+CREATE USER test_user WITH password 'qwerty';
+
+GRANT ALL PRIVILEGES ON DATABASE test_db TO test_user;
+
+
+-- create and fill two tables, create sequence to generate is
 DROP TABLE IF EXISTS students;
 
 DROP TABLE IF EXISTS groups;
